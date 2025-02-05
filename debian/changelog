@@ -1,3 +1,49 @@
+lattice (0.22-6-1) unstable; urgency=medium
+
+  * New upstream release
+  
+  * debian/control: Set Build-Depends: to current R version
+
+ -- Dirk Eddelbuettel <edd@debian.org>  Wed, 20 Mar 2024 06:56:25 -0500
+
+lattice (0.22-5-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Dirk Eddelbuettel <edd@debian.org>  Tue, 24 Oct 2023 19:57:45 -0500
+
+lattice (0.21-9-1) unstable; urgency=medium
+
+  * New upstream release
+
+  * debian/control: Switch to virtual debhelper-compat (= 13)
+
+ -- Dirk Eddelbuettel <edd@debian.org>  Tue, 03 Oct 2023 17:15:55 -0500
+
+lattice (0.21-8-2) unstable; urgency=medium
+
+  * Rebuilding for unstable following bookworm release
+  
+  * debian/control: Set Build-Depends: to current R version
+
+ -- Dirk Eddelbuettel <edd@debian.org>  Tue, 20 Jun 2023 06:38:00 -0500
+
+lattice (0.21-8-1) experimental; urgency=medium
+
+  * New upstream release (into 'experimental' while Debian is frozen)
+
+  * debian/control: Set Build-Depends: to current R version
+  * debian/control: Set Standards-Version: to current version 
+  * debian/control: Switch to virtual debhelper-compat (= 12)
+
+ -- Dirk Eddelbuettel <edd@debian.org>  Wed, 12 Apr 2023 18:01:43 -0500
+
+lattice (0.20-45-3) unstable; urgency=medium
+
+  * Rebuilt under R 4.2.0 and R_GE_version version 15
+
+ -- Dirk Eddelbuettel <edd@debian.org>  Sat, 30 Apr 2022 08:25:03 -0500
+
 lattice (0.20-45-1) unstable; urgency=medium
 
   * New upstream release

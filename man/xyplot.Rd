@@ -2,32 +2,37 @@
 \title{Common Bivariate Trellis Plots}
 \alias{xyplot}
 \alias{xyplot.formula}
+\alias{xyplot.data.frame}
 \alias{barchart}
 \alias{barchart.formula}
+\alias{barchart.data.frame}
 \alias{barchart.numeric}
 \alias{barchart.default}
 \alias{bwplot}
 \alias{bwplot.formula}
+\alias{bwplot.data.frame}
 \alias{bwplot.numeric}
 \alias{dotplot}
 \alias{dotplot.formula}
+\alias{dotplot.data.frame}
 \alias{dotplot.numeric}
 \alias{dotplot.default}
 \alias{stripplot}
 \alias{stripplot.formula}
+\alias{stripplot.data.frame}
 \alias{stripplot.numeric}
 \usage{
-xyplot(x, data, \dots)
-dotplot(x, data, \dots)
-barchart(x, data, \dots)
-stripplot(x, data, \dots)
-bwplot(x, data, \dots)
+xyplot(x, data, ...)
+dotplot(x, data, ...)
+barchart(x, data, ...)
+stripplot(x, data, ...)
+bwplot(x, data, ...)
 
 \method{xyplot}{formula}(x,
        data,
        allow.multiple = is.null(groups) || outer,
        outer = !is.null(groups),
-       auto.key = FALSE,
+       auto.key = lattice.getOption("default.args")$auto.key,
        aspect = "fill",
        panel = lattice.getOption("panel.xyplot"),
        prepanel = NULL,
@@ -39,37 +44,45 @@ bwplot(x, data, \dots)
        ylab,
        ylim,
        drop.unused.levels = lattice.getOption("drop.unused.levels"),
-       \dots,
+       ...,
        lattice.options = NULL,
        default.scales,
        default.prepanel = lattice.getOption("prepanel.default.xyplot"),
        subscripts = !is.null(groups),
        subset = TRUE)
 
+\method{xyplot}{data.frame}(x, data = NULL, formula = data, ...)
+
 \method{dotplot}{formula}(x,
         data,
         panel = lattice.getOption("panel.dotplot"),
         default.prepanel = lattice.getOption("prepanel.default.dotplot"),
-        \dots)
+        ...)
+
+\method{dotplot}{data.frame}(x, data = NULL, formula = data, ...)
 
 \method{barchart}{formula}(x,
          data,
          panel = lattice.getOption("panel.barchart"),
          default.prepanel = lattice.getOption("prepanel.default.barchart"),
          box.ratio = 2,
-         \dots)
+         ...)
+
+\method{barchart}{data.frame}(x, data = NULL, formula = data, ...)
 
 \method{stripplot}{formula}(x,
           data,
           panel = lattice.getOption("panel.stripplot"),
           default.prepanel = lattice.getOption("prepanel.default.stripplot"),
-          \dots)
+          ...)
+
+\method{stripplot}{data.frame}(x, data = NULL, formula = data, ...)
 
 \method{bwplot}{formula}(x,
        data,
        allow.multiple = is.null(groups) || outer,
        outer = FALSE,
-       auto.key = FALSE,
+       auto.key = lattice.getOption("default.args")$auto.key,
        aspect = "fill",
        panel = lattice.getOption("panel.bwplot"),
        prepanel = NULL,
@@ -83,12 +96,14 @@ bwplot(x, data, \dots)
        box.ratio = 1,
        horizontal = NULL,
        drop.unused.levels = lattice.getOption("drop.unused.levels"),
-       \dots,
+       ...,
        lattice.options = NULL,
        default.scales,
        default.prepanel = lattice.getOption("prepanel.default.bwplot"),
        subscripts = !is.null(groups),
        subset = TRUE)
+
+\method{bwplot}{data.frame}(x, data = NULL, formula = data, ...)
 
 }
 
@@ -133,11 +148,11 @@ bwplot(x, data, \dots)
     is described in the \dQuote{Details} section below.  
 
     For the functions documented here, the formula is generally of the
-    form \code{y ~ x | g1 * g2 * \dots} (or equivalently, \code{y ~ x |
-    g1 + g2 + \dots}), indicating that plots of \code{y} (on the y-axis)
+    form \code{y ~ x | g1 * g2 * ...} (or equivalently, \code{y ~ x |
+    g1 + g2 + ...}), indicating that plots of \code{y} (on the y-axis)
     versus \code{x} (on the x-axis) should be produced conditional on
-    the variables \code{g1, g2, \dots}.  Here \code{x} and \code{y} are
-    the primary variables, and \code{g1, g2, \dots} are the conditioning
+    the variables \code{g1, g2, ...}.  Here \code{x} and \code{y} are
+    the primary variables, and \code{g1, g2, ...} are the conditioning
     variables.  The conditioning variables may be omitted to give a
     formula of the form \code{y ~ x}, in which case the plot will
     consist of a single panel with the full dataset.  The formula can
@@ -147,7 +162,7 @@ bwplot(x, data, \dots)
 
     With the exception of \code{xyplot}, the functions documented here
     may also be supplied a formula of the form \code{ ~ x | g1 * g2 *
-    \dots}.  In that case, \code{y} defaults to \code{names(x)} if
+    ...}.  In that case, \code{y} defaults to \code{names(x)} if
     \code{x} is named, and a factor with a single level otherwise.
 
     Cases where \code{x} is not a formula is handled by appropriate
@@ -156,7 +171,7 @@ bwplot(x, data, \dots)
     \code{barchart} and \code{dotplot}, non-trivial methods exist for
     tables and arrays, documented at \code{\link{barchart.table}}.
 
-    The conditioning variables \code{g1, g2, \dots} must be either
+    The conditioning variables \code{g1, g2, ...} must be either
     factors or shingles.  Shingles provide a way of using numeric
     variables for conditioning; see the help page of
     \code{\link{shingle}} for details. Like factors, they have a
@@ -225,6 +240,10 @@ bwplot(x, data, \dots)
     environment of the formula.  For other methods (where \code{x} is
     not a formula), \code{data} is usually ignored, often with a warning
     if it is explicitly specified.
+  }
+  \item{formula}{
+    The formula to be used for the \code{"data.frame"} methods. See
+    documentation for argument \code{x} for details.
   }
   \item{allow.multiple}{
     Logical flag specifying whether the extended formula interface
@@ -297,7 +316,7 @@ bwplot(x, data, \dots)
     this context that all arguments passed to a high-level Lattice
     function (such as \code{xyplot}) that are not recognized by it are
     passed through to the panel function. It is thus generally good
-    practice when defining panel functions to allow a \code{\dots}
+    practice when defining panel functions to allow a \code{...}
     argument. Such extra arguments typically control graphical
     parameters, but other uses are also common. See documentation for
     individual panel functions for specifics.
@@ -426,17 +445,19 @@ bwplot(x, data, \dots)
 
   \item{auto.key}{
     A logical, or a list containing components to be used as arguments
-    to \code{\link{simpleKey}}.  \code{auto.key=TRUE} is equivalent to
-    \code{auto.key=list()}, in which case \code{\link{simpleKey}} is
-    called with a set of default arguments (which may depend on the
-    relevant high-level function).  Most valid components to the
-    \code{key} argument can be specified in this manner, as
-    \code{\link{simpleKey}} will simply add unrecognized arguments to
-    the list it produces.
+    to \code{\link{simpleKey}}. The default can be set using
+    \code{\link{lattice.options}}.
+
+    \code{auto.key = TRUE} is equivalent to \code{auto.key = list()}, in
+    which case \code{\link{simpleKey}} is called with a set of default
+    arguments (which may depend on the relevant high-level function).
+    Most valid components to the \code{key} argument can be specified in
+    this manner, as \code{\link{simpleKey}} will simply add unrecognized
+    arguments to the list it produces.
 
     \code{auto.key} is typically used to automatically produce a
     suitable legend in conjunction with a grouping variable.  If
-    \code{auto.key=TRUE}, a suitable legend will be drawn if a
+    \code{auto.key = TRUE}, a suitable legend will be drawn if a
     \code{groups} argument is also provided, and not otherwise.  In list
     form, \code{auto.key} will modify the default legend thus produced.
     For example, \code{auto.key=list(columns = 2)} will create a legend
@@ -525,7 +546,7 @@ bwplot(x, data, \dots)
     defaults to \code{strip.default}.  See documentation of
     \code{\link{strip.default}} to see the arguments that are available
     to the strip function.  This description also applies to the
-    \code{strip.left} argument (see \code{\dots} below), which can be
+    \code{strip.left} argument (see \code{...} below), which can be
     used to draw strips on the left of each panel (useful for wide short
     panels, e.g., in time-series plots).
   }
@@ -792,7 +813,7 @@ bwplot(x, data, \dots)
     also the \code{par.settings} argument described below for a similar
     treatment of graphical settings.
   }
-  \item{\dots}{
+  \item{...}{
     Further arguments, usually not directly processed by the high-level
     functions documented here, but instead passed on to other
     functions. Such arguments can be broadly categorized into two types:
@@ -1214,7 +1235,7 @@ bwplot(x, data, \dots)
         function.  In this case, this function is called once for each
         panel, potentially with all arguments that are passed to the
         panel function for that panel.  (More specifically, if this
-        function has a \code{\dots} argument, then all panel arguments
+        function has a \code{...} argument, then all panel arguments
         are passed, otherwise, only named arguments that match are
         passed.)  If there is only one conditioning variable, the levels
         of that variable are then sorted so that these values are in
@@ -1268,7 +1289,7 @@ bwplot(x, data, \dots)
   doing the most substantial work.  The structure of the plot that is
   produced is mostly controlled by the formula (implicitly in the case
   of the non-formula methods).  For each unique combination of the
-  levels of the conditioning variables \code{g1, g2, \dots}, a separate
+  levels of the conditioning variables \code{g1, g2, ...}, a separate
   \dQuote{packet} is produced, consisting of the points \code{(x,y)} for
   the subset of the data defined by that combination.  The display can
   be thought of as a three-dimensional array of panels, consisting of one
@@ -1355,28 +1376,11 @@ update(trellis.last.object(),
        par.strip.text = list(cex = 0.75),
        aspect = "iso")
 
-## Examples with data from `Visualizing Data' (Cleveland, 1993) obtained
-## from http://cm.bell-labs.com/cm/ms/departments/sia/wsc/
-
-EE <- equal.count(ethanol$E, number=9, overlap=1/4)
-
-## Constructing panel functions on the fly; prepanel
-xyplot(NOx ~ C | EE, data = ethanol,
-       prepanel = function(x, y) prepanel.loess(x, y, span = 1),
-       xlab = "Compression Ratio", ylab = "NOx (micrograms/J)",
-       panel = function(x, y) {
-           panel.grid(h = -1, v = 2)
-           panel.xyplot(x, y)
-           panel.loess(x, y, span=1)
-       },
-       aspect = "xy")
-
 ## Extended formula interface 
 
 xyplot(Sepal.Length + Sepal.Width ~ Petal.Length + Petal.Width | Species,
        data = iris, scales = "free", layout = c(2, 2),
-       auto.key = list(x = .6, y = .7, corner = c(0, 0)))
-
+       auto.key = list(x = .75, y = .75, corner = c(0.5, 0.5)))
 
 ## user defined panel functions
 
@@ -1384,10 +1388,10 @@ states <- data.frame(state.x77,
                      state.name = dimnames(state.x77)[[1]],
                      state.region = state.region)
 xyplot(Murder ~ Population | state.region, data = states,
-       groups = state.name,
-       panel = function(x, y, subscripts, groups) {
-           ltext(x = x, y = y, labels = groups[subscripts], cex=1,
-                 fontfamily = "HersheySans")
+       snames = states$state.name,
+       panel = function(x, y, subscripts, snames) {
+           panel.text(x = x, y = y, labels = snames[subscripts], cex = 1,
+                      fontfamily = "HersheySans")
        })
 
 ## Stacked bar chart
@@ -1398,7 +1402,7 @@ barchart(yield ~ variety | site, data = barley,
          ylab = "Barley Yield (bushels/acre)",
          scales = list(x = list(rot = 45)))
 
-bwplot(voice.part ~ height, data=singer, xlab="Height (inches)")
+bwplot(voice.part ~ height, data = singer, xlab = "Height (inches)")
 
 dotplot(variety ~ yield | year * site, data=barley)
 

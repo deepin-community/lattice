@@ -79,7 +79,13 @@ shingle <-
 }
 
 
-as.data.frame.shingle <- as.data.frame.factor
+as.data.frame.shingle <-
+    function(x, row.names = NULL, optional = FALSE, ...,
+             nm = deparse1(substitute(x)))
+{
+    as.data.frame.vector(x, row.names = row.names,
+                         optional = optional, ..., nm = nm)
+}
 
 is.shingle <-
     function(x) inherits(x, "shingle")
@@ -154,7 +160,7 @@ plot.shingle <-
              ylab = gettext("Panel"),
              ...)
 {
-    ocall <- sys.call(sys.parent()); ocall[[1]] <- quote(plot)
+    ocall <- sys.call(); ocall[[1]] <- quote(plot)
     panel.shingle <-
         function(x, y,
                  col = plot.polygon$col,
