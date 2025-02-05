@@ -3,7 +3,9 @@
 \alias{levelplot}
 \alias{contourplot}
 \alias{levelplot.formula}
+\alias{levelplot.data.frame}
 \alias{contourplot.formula}
+\alias{contourplot.data.frame}
 \alias{levelplot.table}
 \alias{contourplot.table}
 \alias{levelplot.array}
@@ -58,6 +60,10 @@ contourplot(x, data, \dots)
             region = FALSE,
             \dots)
 
+\method{levelplot}{data.frame}(x, data = NULL, formula = data, ...)
+
+\method{contourplot}{data.frame}(x, data = NULL, formula = data, ...)
+
 \method{levelplot}{table}(x, data = NULL, aspect = "iso", \dots, xlim, ylim)
 
 \method{contourplot}{table}(x, data = NULL, aspect = "iso", \dots, xlim, ylim)
@@ -76,7 +82,6 @@ contourplot(x, data, \dots)
 \method{levelplot}{array}(x, data = NULL, \dots)
 
 \method{contourplot}{array}(x, data = NULL, \dots)
-
 
 }
 \description{
@@ -113,6 +118,10 @@ contourplot(x, data, \dots)
     variables in the formula (as well as \code{groups} and
     \code{subset}, if any) are to be evaluated.  Usually ignored with a
     warning in other cases.
+  }
+  \item{formula}{
+    The formula to be used for the \code{"data.frame"} methods. See
+    documentation for argument \code{x} for details.
   }
   \item{row.values, column.values}{ Optional vectors of values that
     define the grid when \code{x} is a matrix.  \code{row.values} and
@@ -219,7 +228,7 @@ contourplot(x, data, \dots)
 	\code{title} defaults to \code{NULL}, which means no title is drawn.
       }
 
-      \item{\code{title}:}{
+      \item{\code{title.control}:}{
 	A list providing control over the placement of a title, if
 	specified. Currently two components are honoured: \code{side}
 	can take values \code{"top"}, \code{"bottom"}, \code{"left"},
@@ -357,7 +366,7 @@ levelplot(z ~ x * y, grid, cuts = 50, scales=list(log="e"), xlab="",
           ylab="", main="Weird Function", sub="with log scales",
           colorkey = FALSE, region = TRUE)
 ## triangular end-points in color key, with a title
-levelplot(z ~ x * y, grid, col.regions = topo.colors(10),
+levelplot(z ~ x * y, grid, col.regions = hcl.colors(10),
           at = c(-Inf, seq(-0.8, 0.8, by = 0.2), Inf))
 
 #S-PLUS example
